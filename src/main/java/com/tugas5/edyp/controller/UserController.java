@@ -23,6 +23,9 @@ public class UserController {
     UserService service;
 
 
+
+
+
 //--------------------------------->pagination<-------------------------------------------//
 
 
@@ -43,6 +46,22 @@ public class UserController {
         } else {
             result.put("successs", false);
             result.put("message", "user gagal ditambahkan");
+        }
+        return result;
+    }
+
+    //--------------------------------->Mendelete data<-------------------------------------------//
+
+    @DeleteMapping("/delete")
+        //id dr param postman
+    Map<String, Object> deleteBook(@RequestParam String id) {
+        Map<String, Object> result = new HashMap<>();
+        if (service.DeleteBook(id)) {
+            result.put("success", true);
+            result.put("message", "Book Deleted!");
+        } else {
+            result.put("success", false);
+            result.put("message", "Book Not Deleted!");
         }
         return result;
     }

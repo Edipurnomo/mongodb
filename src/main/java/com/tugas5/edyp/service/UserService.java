@@ -21,7 +21,7 @@ public class UserService {
 
 
     public List<User> getAllUser(Integer pageNo, String sortKey){
-        int noOfRecord = 4;
+        int noOfRecord = 5;
         Pageable page = PageRequest.of(pageNo, noOfRecord, Sort.by(sortKey));
         Page<User> pagedResult = repository.findAll(page);
         return pagedResult.getContent();
@@ -38,5 +38,19 @@ public class UserService {
         }
     }
 
+    public boolean DeleteBook(String id) {
+        User result = repository.deleteByid(id);
+        if (result != null) {
+            try {
+                repository.delete(result);
+                return true;
+            } catch (Exception e) {
+                return false;
+            }
+
+        } else {
+            return false;
+        }
+    }
 
 }
