@@ -58,10 +58,23 @@ public class UserController {
         Map<String, Object> result = new HashMap<>();
         if (service.DeleteBook(id)) {
             result.put("success", true);
-            result.put("message", "Book Deleted!");
+            result.put("message", "User Deleted!");
         } else {
             result.put("success", false);
-            result.put("message", "Book Not Deleted!");
+            result.put("message", "User Not Deleted!");
+        }
+        return result;
+    }
+
+    @PutMapping("/update")
+    Map<String, Object> UpdateUser(@RequestBody User body) {
+        Map<String, Object> result = new HashMap<>();
+        if (service.updateUser(body)) {
+            result.put("success", true);
+            result.put("mes", "berhasil");
+        } else {
+            result.put("success", false);
+            result.put("mes", "gagal");
         }
         return result;
     }

@@ -11,6 +11,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class UserService {
@@ -27,6 +28,23 @@ public class UserService {
         return pagedResult.getContent();
     }
 
+
+    public boolean updateUser(User body) {
+        Optional<User> userResult = repository.findById(body.getId());
+
+        if (userResult != null) {
+            try {
+
+                repository.save(body);
+                return true;
+            } catch (Exception e) {
+                return false;
+            }
+        } else {
+            return false;
+        }
+
+    }
 
     public boolean saveUser(User body) {
 
